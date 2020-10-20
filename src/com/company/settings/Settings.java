@@ -21,7 +21,7 @@ public class Settings {
     public static final String FORMAT_AMOUNT = "%.2f";
     public static final String FORMAT_RATE = "%.4f";
     public static final String FORMAT_DATE = "dd.MM.yyyy";
-    public static final String FORMAT_DATE_MONTH = "MMMM.yyyy";
+    public static final String FORMAT_DATE_MONTH = "MMMM yyyy";
     public static final String FORMAT_DATE_YEAR = "yyyy";
 
     public static final int COUNT_OVERVIEW_ROWS = 10;

@@ -7,18 +7,30 @@ final public class Text {
     private static HashMap<String, String> data = new HashMap<>();
 
     public static String get(String key) {
-        return data.get(key);
+        if (data.containsKey(key)) return data.get(key);
+        else System.out.println("Такого ключа в Text не существует");// для отладки
+        return "";
     }
 
     public static String[] getMonths() {
         String[] months = new String[12];
         months[0] = get("JANUARY");
         months[1] = get("FEBRUARY");
+        months[2] = get("MARCH");
+        months[3] = get("APRIL");
+        months[4] = get("MAY");
+        months[5] = get("JUNE");
+        months[6] = get("JULY");
+        months[7] = get("AUGUST");
+        months[8] = get("SEPTEMBER");
+        months[9] = get("OCTOBER");
+        months[10] = get("NOVEMBER");
+        months[11] = get("DECEMBER");
         return months;
         //return data.values().toArray();
     }
 
-    public static  void init() {
+    public static void init() {
         data.put("PROGRAM_NAME", "Домашняя бухгалтерия");
         data.put("MENU_FILE", "Файл");
         data.put("MENU_EDIT", "Правка");
@@ -31,15 +43,18 @@ final public class Text {
         data.put("APRIL", "Апрель");
         data.put("MAY", "Май");
         data.put("JUNE", "Июнь");
-        data.put("JULY", "юль");
+        data.put("JULY", "Июль");
         data.put("AUGUST", "Август");
-        data.put("SEPTEMBER", "Сентябр");
-        data.put("OCTOBER", "Октябр");
-        data.put("NOVOMBER", "Ноябр");
-        data.put("DECEMBER", "Декабр");
+        data.put("SEPTEMBER", "Сентябрь");
+        data.put("OCTOBER", "Октябрь");
+        data.put("NOVEMBER", "Ноябрь");
+        data.put("DECEMBER", "Декабрь");
 
         data.put("ERROR_TITLE_EMPTY", "Вы не ввели название");
         //todo ...
+
+        data.put("Yes","Да");
+        data.put("No","Нет");
     }
 
 
