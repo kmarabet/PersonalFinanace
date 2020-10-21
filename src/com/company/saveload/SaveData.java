@@ -1,7 +1,6 @@
 package com.company.saveload;
 
 import com.company.model.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,20 +26,40 @@ public class SaveData {
         return articles;
     }
 
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
+
     public List<Currency> getCurrencies() {
         return currencies;
+    }
+
+    public void setCurrencies(List<Currency> currencies) {
+        this.currencies = currencies;
     }
 
     public List<Account> getAccounts() {
         return accounts;
     }
 
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+
     public List<Transaction> getTransactions() {
         return transactions;
     }
 
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
     public List<Transfer> getTransfers() {
         return transfers;
+    }
+
+    public void setTransfers(List<Transfer> transfers) {
+        this.transfers = transfers;
     }
 
     public Currency getBaseCurrency() {
