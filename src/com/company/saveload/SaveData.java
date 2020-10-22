@@ -15,6 +15,10 @@ public final class SaveData {
     private List<Account> accounts = new ArrayList<>();
     private List<Transaction> transactions = new ArrayList<>();
     private List<Transfer> transfers = new ArrayList<>();
+    
+    private final Filter filter;
+    private Common oldCommon;
+    private boolean isSaved = true;
 
     private final Filter filter;
     private Common oldCommon;
@@ -54,6 +58,10 @@ public final class SaveData {
     public static SaveData getInstance(){
         if (instance == null) instance = new SaveData();
         return instance;
+    }
+    
+    public Filter getFilter(){
+        return filter;
     }
 
     public Filter getFilter(){
