@@ -3,7 +3,6 @@ package com.company.saveload;
 import com.company.exception.ModelException;
 import com.company.model.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public final class SaveData {
@@ -16,10 +15,6 @@ public final class SaveData {
     private List<Transaction> transactions = new ArrayList<>();
     private List<Transfer> transfers = new ArrayList<>();
     
-    private final Filter filter;
-    private Common oldCommon;
-    private boolean isSaved = true;
-
     private final Filter filter;
     private Common oldCommon;
     private boolean isSaved = true;
@@ -60,10 +55,6 @@ public final class SaveData {
         return instance;
     }
     
-    public Filter getFilter(){
-        return filter;
-    }
-
     public Filter getFilter(){
         return filter;
     }
