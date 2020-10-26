@@ -8,23 +8,24 @@ import javax.xml.bind.Unmarshaller;
 
 public class SaveLoad {
 
-    public void load(SaveData sd) {
+    public static void load(SaveData sd) {
         try {
             JAXBContext context = JAXBContext.newInstance(Wrapper.class);
             Unmarshaller um = context.createUnmarshaller();
             Wrapper wrapper = (Wrapper) um.unmarshal(Settings.getFileSave());
-            sd.setAccounts(wrapper.getAccounts());
-            sd.setArticles(wrapper.getArticles());
-            sd.setTransactions(wrapper.getTransactions());
+            sd.setAccounts(wrapper.getAccounts() != null ? wrapper.getAccounts(): sd.getAccounts());
+            sd.setArticles(wrapper.getArticles());//todo
+            sd.setTransactions(wrapper.getTransactions());//todo
             sd.setTransfers(wrapper.getTransfers());
             sd.setCurrencies(wrapper.getCurrencies());
 
         } catch (JAXBException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("Файл не существует!");
         }
     }
 
-    public void save(SaveData sd){
+    public static void save(SaveData sd){
         try {
             JAXBContext context = JAXBContext.newInstance(Wrapper.class);
             Marshaller m = context.createMarshaller();

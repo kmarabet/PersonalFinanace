@@ -1,7 +1,7 @@
 package com.company.model;
 
 import com.company.exception.ModelException;
-
+import com.company.saveload.SaveData;
 import java.util.Date;
 
 public class Transfer extends Common {
@@ -101,5 +101,22 @@ public class Transfer extends Common {
                 '}';
     }
 
+    @Override
+    public void postAdd(SaveData sd) {
+        setAmounts(sd);
+    }
+    @Override
+    public void postEdit(SaveData sd) {
+        setAmounts(sd);
+    }
+    @Override
+    public void postRemove(SaveData sd) {
+        setAmounts(sd);
+    }
+
+    private void setAmounts(SaveData sd) {
+        for (Account a : sd.getAccounts())
+            a.setAmountFromTransactionsAndTransfers(sd.getTransactions(), sd.getTransfers());
+    }
 
 }

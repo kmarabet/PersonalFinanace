@@ -1,6 +1,7 @@
 package com.company.model;
 
 import com.company.exception.ModelException;
+import com.company.saveload.SaveData;
 
 import java.util.Objects;
 
@@ -9,13 +10,13 @@ public class Currency extends Common {
     private String title;
     private String code;
     private double rate;
-    private boolean isOne;
+    private boolean isOn;
     private boolean isBase;
 
     public Currency() {
     }
 
-    public Currency(String title, String code, double rate, boolean isOne, boolean isBase) throws ModelException {
+    public Currency(String title, String code, double rate, boolean isOn, boolean isBase) throws ModelException {
         if (title.length() == 0) throw new ModelException(ModelException.TITLE_EMPTY);
         if (code.length() == 0) throw new ModelException(ModelException.CODE_EMPTY);
         if (rate <= 0) throw new ModelException(ModelException.RATE_INCORRECT);
@@ -23,7 +24,7 @@ public class Currency extends Common {
         this.title = title;
         this.code = code;
         this.rate = rate;
-        this.isOne = isOne;
+        this.isOn = isOn;
         this.isBase = isBase;
     }
 
@@ -51,12 +52,12 @@ public class Currency extends Common {
         this.rate = rate;
     }
 
-    public boolean isOne() {
-        return isOne;
+    public boolean isOn() {
+        return isOn;
     }
 
-    public void setOne(boolean one) {
-        isOne = one;
+    public void setOn(boolean on) {
+        isOn = on;
     }
 
     public boolean isBase() {
@@ -73,7 +74,7 @@ public class Currency extends Common {
                 "title='" + title + '\'' +
                 ", code='" + code + '\'' +
                 ", rate=" + rate +
-                ", isOne=" + isOne +
+                ", isOne=" + isOn +
                 ", isBase=" + isBase +
                 '}';
     }
@@ -99,4 +100,36 @@ public class Currency extends Common {
     public double getRateByCurrency(Currency currency) {
         return rate / currency.rate;
     }
+
+    @Override
+    public void postAdd(SaveData sd){
+        clearBase(sd);
+    }
+
+    @Override
+    public void postEdit(SaveData sd) {
+        clearBase(sd);
+        for (Account a : sd.getAccounts()){
+            if (a.getCurrency().equals(sd.getOldCommon())) a.setCurrency(this);
+        }
+    }
+
+    private void clearBase(SaveData sd) {
+        if (isBase){
+            rate= 1;
+            Currency old = (Currency) sd.getOldCommon();
+            for (Currency c : sd.getCurrencies()){
+                if (!this.equals(c)){
+                    c.setBase(false);
+                    if (old != null) c.setRate(c.rate / old.rate);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void postRemove(SaveData sd) {
+        super.postRemove(sd);
+    }
+
 }

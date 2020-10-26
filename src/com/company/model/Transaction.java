@@ -1,7 +1,7 @@
 package com.company.model;
 
 import com.company.exception.ModelException;
-
+import com.company.saveload.SaveData;
 import java.util.Date;
 
 public class Transaction extends Common {
@@ -91,5 +91,22 @@ public class Transaction extends Common {
 
 //    Equals не нужен т.к. можно сходить в магазин и потратить туже сумму в тот же день.
 
+    @Override
+    public void postAdd(SaveData sd) {
+        setAmounts(sd);
+    }
+    @Override
+    public void postEdit(SaveData sd) {
+        setAmounts(sd);
+    }
+    @Override
+    public void postRemove(SaveData sd) {
+        setAmounts(sd);
+    }
+
+    private void setAmounts(SaveData sd) {
+        for (Account a : sd.getAccounts())
+            a.setAmountFromTransactionsAndTransfers(sd.getTransactions(), sd.getTransfers());
+    }
 
 }
