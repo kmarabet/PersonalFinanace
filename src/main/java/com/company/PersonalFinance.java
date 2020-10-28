@@ -16,14 +16,25 @@ import java.util.logging.Logger;
 
 public class PersonalFinance {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         init();
 
-        try {
-            testModel();
-        } catch (ModelException e) {
-            e.printStackTrace();
-        }
+//        testModel();
+
+        SaveData sd = SaveData.getInstance();
+        sd.updateCurrencies();
+        sd.save();
+        System.out.println(sd.getCurrencies());
+
+//        Currency c1 = new Currency("Рубль","RUB", 1, true, false);
+//        Currency c5 = new Currency("Бел.Руб.","BYN", 1, true, true);
+//        HashMap<String, Double>  rubRates = RateCurrency.getRates(c1);
+//        System.out.println(rubRates);
+//        HashMap<String, Double>  belrubRates = RateCurrency.getRates(c5);
+//        System.out.println(belrubRates);
+
+//        testModel();
+
         // write your code here
         System.out.println(Format.dateMonth(new Date()));
 //        System.out.println(Text.get("PROGRAM_NAME"));
@@ -111,7 +122,6 @@ public class PersonalFinance {
 //        sd.load();
         System.out.println(sd);
 
-
     }
 
     private static void init() {
@@ -127,6 +137,4 @@ public class PersonalFinance {
 //            e.printStackTrace();
         }
     }
-
-
 }

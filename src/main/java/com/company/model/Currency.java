@@ -2,6 +2,7 @@ package com.company.model;
 
 import com.company.exception.ModelException;
 import com.company.saveload.SaveData;
+import com.company.settings.Format;
 
 import java.util.Objects;
 
@@ -73,7 +74,7 @@ public class Currency extends Common {
         return "Currency{" +
                 "title='" + title + '\'' +
                 ", code='" + code + '\'' +
-                ", rate=" + rate +
+                ", rate=" + Format.rate(rate) +
                 ", isOne=" + isOn +
                 ", isBase=" + isBase +
                 '}';

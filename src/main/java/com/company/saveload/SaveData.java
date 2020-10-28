@@ -3,6 +3,7 @@ package com.company.saveload;
 import com.company.exception.ModelException;
 import com.company.model.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public final class SaveData {
@@ -163,6 +164,16 @@ public final class SaveData {
         getRef(c).remove(c);
         c.postRemove(this);
         isSaved = false;
+    }
+
+    public void updateCurrencies() throws Exception {
+        HashMap<String, Double> rates = RateCurrency.getRates(getBaseCurrency());
+        for (Currency c: currencies) {
+            c.setRate(rates.get(c.getCode()));
+        }
+        for (Account a: accounts){
+            a.getCurrency().setRate(rates.get(a.getCurrency().getCode()));
+        }
     }
 
     private List getRef(Common c) {

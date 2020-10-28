@@ -13,6 +13,7 @@ public class Article extends Common {
 
     public Article(String title) throws ModelException {
         if (title.length() == 0) throw new ModelException(ModelException.TITLE_EMPTY);
+        this.title = title;
     }
 
     public String getTitle() {
